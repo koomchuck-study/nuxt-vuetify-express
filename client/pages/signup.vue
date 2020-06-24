@@ -36,8 +36,11 @@
             v-model="terms"
             required
             :rules="termsRules"
-            label="동의"></v-checkbox>
-          <v-btn color="green" type="submit" :disabled="!valid">Sign up</v-btn>
+            label="동의"
+          />
+          <v-btn color="green" type="submit" :disabled="!valid">
+            Sign up
+          </v-btn>
         </v-form>
       </v-container>
     </v-card>
@@ -45,47 +48,40 @@
 </template>
 
 <script>
-
-  export default {
-    components: {},
-    data() {
-      return {
-        valid: false,
-        email: "",
-        password: "",
-        passwordCheck: "",
-        nickname: "",
-        terms: false,
-        emailRules: [
-          v => !!v || "Email required",
-          v => /.+@.+/.test(v) || "enter Email"
-        ],
-        nicknameRules: [
-          v => !!v || "Nick Name required"
-        ],
-        passwordRules: [
-          v => !!v || "Password required"
-        ],
-        passwordCheckRules: [
-          v => !!v || "Password check is required",
-          v => v === this.password || "Password check is required"
-        ],
-        termsRules: [
-          v => !!v || "Term required"
-        ]
-      }
-    },
-    methods: {
-      onSubmitForm() {
-        if (this.$refs.form.validate()) {
-          alert("Sign");
-        }
-      }
-    },
-    head() {
-      return {
-        title: "sign up"
-      }
+export default {
+  components: {},
+  data() {
+    return {
+      valid: false,
+      email: "",
+      password: "",
+      passwordCheck: "",
+      nickname: "",
+      terms: false,
+      emailRules: [
+        (v) => !!v || "Email required",
+        (v) => /.+@.+/.test(v) || "enter Email",
+      ],
+      nicknameRules: [(v) => !!v || "Nick Name required"],
+      passwordRules: [(v) => !!v || "Password required"],
+      passwordCheckRules: [
+        (v) => !!v || "Password check is required",
+        (v) => v === this.password || "Password check is required",
+      ],
+      termsRules: [(v) => !!v || "Term required"],
     }
-  }
+  },
+  methods: {
+    onSubmitForm() {
+      if (this.$refs.form.validate()) {
+        alert("Sign")
+      }
+    },
+  },
+  head() {
+    return {
+      title: "sign up",
+    }
+  },
+}
 </script>
