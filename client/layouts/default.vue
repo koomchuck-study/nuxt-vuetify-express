@@ -24,9 +24,6 @@
     </v-app-bar>
 
     <v-main>
-      <v-btn @click="onChangeName">
-        <div>{{ name }}</div>
-      </v-btn>
       <v-container>
         <v-row>
           <v-col cols="12" md="4">
