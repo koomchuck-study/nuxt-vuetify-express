@@ -32,11 +32,9 @@
 </template>
 
 <script>
-  export default {
-    name: "PostCard"
-  }
+export default {
+  name: "PostCard",
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

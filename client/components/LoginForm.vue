@@ -4,24 +4,25 @@
       <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
         <v-container>
           <v-text-field
+            v-model="email"
             label="email"
             type="email"
-            v-model="email"
             :rules="emailRules"
-            required/>
+            required
+          />
           <v-text-field
+            v-model="password"
             label="password"
             type="password"
-            v-model="password"
             :rules="passwordRules"
-            required/>
-          <v-btn
-            color="green"
-            type="submit"
-            :disabled="!valid"
-          >login
+            required
+          />
+          <v-btn color="green" type="submit" :disabled="!valid">
+            login
           </v-btn>
-          <v-btn nuxt to="/signup">Sign up</v-btn>
+          <v-btn nuxt to="/signup">
+            Sign up
+          </v-btn>
         </v-container>
       </v-form>
     </v-card>
@@ -29,30 +30,26 @@
 </template>
 
 <script>
-  export default {
-    name: "LoginForm",
-    data() {
-      return {
-        valid: false,
-        email: "",
-        password: "",
-        emailRules: [
-          v => !!v || "Email required",
-          v => /.+@.+/.test(v) || "enter Email"
-        ],
-        passwordRules: [
-          v => !!v || "Password required"
-        ],
-      }
+export default {
+  name: "LoginForm",
+  data() {
+    return {
+      valid: false,
+      email: "",
+      password: "",
+      emailRules: [
+        (v) => !!v || "Email required",
+        (v) => /.+@.+/.test(v) || "enter Email",
+      ],
+      passwordRules: [(v) => !!v || "Password required"],
+    }
+  },
+  methods: {
+    onSubmitForm() {
+      this.$refs.form.validate
     },
-    methods: {
-      onSubmitForm() {
-        this.$refs.form.validate;
-      }
-    },
-  }
+  },
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

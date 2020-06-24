@@ -18,11 +18,9 @@
 </template>
 
 <script>
-  export default {
-    name: "FollowList"
-  }
+export default {
+  name: "FollowList",
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
