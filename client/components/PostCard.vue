@@ -2,15 +2,9 @@
   <div style="margin-bottom: 20px;">
     <v-card>
       <v-img />
-      <v-card-title>
-        <h3>
-          <nuxt-link :to="'/user/' + post.id">
-            {{ post.User.nickname }}
-          </nuxt-link>
-        </h3>
-      </v-card-title>
       <v-card-text>
         <div>
+          <h3>{{ post.User.nickname }}</h3>
           <div>{{ post.content }}</div>
         </div>
       </v-card-text>
@@ -41,29 +35,28 @@
         </v-menu>
       </v-card-actions>
     </v-card>
-    <!--    <template v-if="commentOpened">-->
-    <!--&lt;!&ndash;      <comment-form :post-id="post.id" />&ndash;&gt;-->
-    <!--      <v-list>-->
-    <!--        <v-list-item v-for="c in post.Comments" :key="c.id">-->
-    <!--          <v-list-item-avatar color="teal">-->
-    <!--            <span>{{ c.User.nickname[0] }}</span>-->
-    <!--          </v-list-item-avatar>-->
-    <!--          <v-list-item-content>-->
-    <!--            <h3>{{ c.User.nickname }}</h3>-->
-    <!--            <div>{{ c.content }}</div>-->
-    <!--          </v-list-item-content>-->
-    <!--        </v-list-item>-->
-    <!--      </v-list>-->
-    <!--    </template>-->
-    <!--    -->
+    <template v-if="commentOpened">
+      <comment-form :post-id="post.id" />
+      <v-list>
+        <v-list-item v-for="c in post.Comments" :key="c.id">
+          <v-list-item-avatar color="teal">
+            <span>{{ c.User.nickname[0] }}</span>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <h3>{{ c.User.nickname }}</h3>
+            <div>{{ c.content }}</div>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </template>
   </div>
 </template>
 
 <script>
-// import CommentForm from "~/components/CommentForm"
+import CommentForm from "~/components/CommentForm"
 export default {
   components: {
-    // CommentForm,
+    CommentForm,
   },
   props: {
     post: {
@@ -90,9 +83,4 @@ export default {
 }
 </script>
 
-<style scoped>
-a {
-  color: inherit;
-  text-decoration: none;
-}
-</style>
+<style></style>
