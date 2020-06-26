@@ -27,7 +27,6 @@
 <script>
 export default {
   props: {
-    abc: Array,
     users: {
       type: Array,
       required: true,

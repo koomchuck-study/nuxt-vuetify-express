@@ -2,14 +2,15 @@
   <div style="margin-bottom: 20px;">
     <v-card>
       <v-img />
-      <v-card-text>
+      <v-card-title>
         <div>
-          <h3>{{ post.User.nickname }}</h3>
-          <nuxt-link :to="'/post/' + post.id">
-            {{ post.content }}
-          </nuxt-link>
+          <h3>
+            <nuxt-link :to="'/user/' + post.id">
+              {{ post.User.nickname }}
+            </nuxt-link>
+          </h3>
         </div>
-      </v-card-text>
+      </v-card-title>
       <v-card-actions>
         <v-btn text color="orange">
           <v-icon>mdi-twitter-retweet</v-icon>
@@ -56,6 +57,7 @@
 
 <script>
 import CommentForm from "~/components/CommentForm"
+
 export default {
   components: {
     CommentForm,
@@ -85,4 +87,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+a {
+  color: inherit;
+  text-decoration: none;
+}
+</style>
