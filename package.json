@@ -10,7 +10,8 @@
     "serve": "nuxt serve",
     "browerslist": "browserslist",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
+    "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
+    "back": "node ./backend/app.js"
   },
   "browserslist": [
     "last 2 version",
@@ -19,7 +20,10 @@
   ],
   "dependencies": {
     "@nuxtjs/axios": "^5.11.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
     "nuxt": "^2.13.1",
+    "sequelize": "^6.2.3",
     "vuetify": "^2.3.2"
   },
   "devDependencies": {
@@ -30,6 +34,7 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "sequelize-cli": "^6.1.0"
   }
 }
