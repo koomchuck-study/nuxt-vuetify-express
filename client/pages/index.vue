@@ -2,26 +2,26 @@
   <v-container>
     <post-form v-if="me" />
     <div>
-      <post-card v-for="post in mainPosts" :key="post.id" :post="post" />
+      <post-card v-for="p in mainPosts" :key="p.id" :post="p" />
     </div>
   </v-container>
 </template>
 
 <script>
-import PostForm from "../components/PostForm"
-import PostCard from "../components/PostCard"
+import PostCard from "~/components/PostCard"
+import PostForm from "~/components/PostForm"
 
 export default {
   components: {
-    PostForm,
     PostCard,
+    PostForm,
   },
-  asyncData({ store }) {
+  fetch({ store }) {
     store.dispatch("posts/loadPosts")
   },
   data() {
     return {
-      name: "julia.js",
+      name: "Nuxt.js",
     }
   },
   computed: {
@@ -43,6 +43,7 @@ export default {
   },
   methods: {
     onScroll() {
+      console.log("scroll")
       if (
         window.scrollY + document.documentElement.clientHeight >
         document.documentElement.scrollHeight - 300
@@ -55,3 +56,5 @@ export default {
   },
 }
 </script>
+
+<style></style>

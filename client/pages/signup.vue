@@ -37,7 +37,7 @@
               v-model="terms"
               required
               :rules="[(v) => !!v || '약관에 동의해야 합니다.']"
-              label="제로초 말을 잘 들을 것을 약속합니다."
+              label="pignu ok"
             />
             <v-btn color="green" type="submit">
               가입하기
@@ -76,7 +76,6 @@ export default {
       return this.$store.state.users.me
     },
   },
-  // TODO watch 챙기자
   watch: {
     me(value) {
       if (value) {
@@ -93,6 +92,7 @@ export default {
           .dispatch("users/signUp", {
             nickname: this.nickname,
             email: this.email,
+            password: this.password,
           })
           .then(() => {
             this.$router.push({

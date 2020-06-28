@@ -61,11 +61,10 @@ export default {
   methods: {
     onSubmitForm() {
       if (this.$refs.form.validate()) {
-        this.$store.dispatch("users/signUp", {
-          nickname: "pignu",
+        this.$store.dispatch("users/logIn", {
           email: this.email,
+          password: this.password,
         })
-        alert("Sign")
       }
     },
     onLogOut() {
