@@ -1,51 +1,56 @@
 const express = require("express")
 const cors = require("cors")
+const passport = require("passport")
+const session = require("express-session")
+const cookie = require("cookie-parser")
+const morgan = require("morgan")
+
 const db = require("./models")
 const passportConfig = require("./passport")
+const userRouter = require("./routes/user")
+const postRouter = require("./routes/post")
 const app = express()
-const bcrypt = require("bcrypt")
 
 db.sequelize.sync()
+passportConfig()
 
-app.use(cors("http://localhost:3000"))
+app.use(morgan("dev"))
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+)
+app.use("/", express.static("uploads"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cookie("julia"))
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: "julia",
+    cookie: {
+      httpOnly: true,
+      secure: false,
+    },
+  })
+)
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.get("/", (req, res) => {
-  res.send("ih")
+  res.status(200).send("hi")
 })
 
-app.post("/user", async (req, res, next) => {
-  try {
-    const password = await bcrypt.hash(req.body.password, 12)
-    const { email, nickname } = req.body
+app.use("/user", userRouter)
+app.use("/post", postRouter)
 
-    const exUser = await db.User.findOne({
-      email,
-    })
-    if (exUser) {
-      return res.status(403).json({
-        errorCode: 403,
-        message: "already",
-      })
-    }
-    const newUser = await db.User.create({
-      email,
-      nickname,
-      password,
-    })
-    return res.status(201).json(newUser)
-  } catch (err) {
-    return next(err)
+app.post("/post", (req, res) => {
+  if (req.isAuthenticated()) {
   }
 })
 
-app.post("/user/login", (req, res) => {
-  req.body.email
-  req.body.password
-})
-
-const port = 3085
-app.listen(port, () => {
-  console.log(`app listen ${port}`)
+app.listen(3085, () => {
+  console.log(`백엔드 서버 ${3085}번 포트에서 작동중.`)
 })
