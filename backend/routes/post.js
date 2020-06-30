@@ -60,4 +60,61 @@ router.post("/", isLoggedIn, async (req, res, next) => {
   }
 })
 
+router.get("/:id/comments", async (req, res, next) => {
+  try {
+    const post = await db.Post.findOne({
+      where: { id: req.params.id },
+    })
+    if (!post) {
+      return res.status(404).send("not exist post")
+    }
+    const comments = await db.Comment.findAll({
+      where: {
+        PostId: req.params.id,
+      },
+      include: [
+        {
+          model: db.User,
+          attributes: ["id", "nickname"],
+          order: [["createdAt", "ASC"]],
+        },
+      ],
+    })
+    return res.json(comments)
+  } catch (e) {
+    console.error(e)
+    next(e)
+  }
+})
+router.post("/:id/comment", isLoggedIn, async (req, res, next) => {
+  try {
+    const post = await db.Post.findOne({
+      where: { id: req.params.id },
+    })
+    if (!post) {
+      return res.status(404).send("post 존재 X")
+    }
+    const newComment = await db.Comment.create({
+      PostId: post.id,
+      UserId: req.user.id,
+      content: req.body.content,
+    })
+
+    const comment = await db.Comment.findOne({
+      where: {
+        id: newComment.id,
+      },
+      include: [
+        {
+          model: db.User,
+          attributes: ["id", "nickname"],
+        },
+      ],
+    })
+    return res.json(comment)
+  } catch (e) {
+    next(e)
+  }
+})
+
 module.exports = router

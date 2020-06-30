@@ -58,9 +58,6 @@ export default {
             id: Date.now(),
             postId: this.postId,
             content: this.content,
-            User: {
-              nickname: this.me.nickname,
-            },
           })
           .then(() => {
             this.content = ""
